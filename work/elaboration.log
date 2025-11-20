@@ -1,0 +1,42 @@
+Riviera-PRO 2023.04.112.8911(Linux64) 2025-11-19 19:45:48
+
+Elaboration top modules:
+Architecture                  simulacao(tb_maquina_de_venda_de_bebidas)
+
+
+--------------------------------------------------------------------------------------------------------------------
+Entity                                | Architecture | Library | Info | Compiler Version      | Compilation Options
+--------------------------------------------------------------------------------------------------------------------
+tb_maquina_de_venda_de_bebidas        | simulacao    | work    |      | 2023.04.112 (Linux64) |  -2019
+maquina_de_venda_de_bebidas_top_level | structural   | work    |      | 2023.04.112 (Linux64) |  -2019
+controller                            | rtl          | work    |      | 2023.04.112 (Linux64) |  -2019
+datapath                              | structural   | work    |      | 2023.04.112 (Linux64) |  -2019
+mux_4to1                              | behavioral   | work    |      | 2023.04.112 (Linux64) |  -2019
+registrador                           | rtl          | work    |      | 2023.04.112 (Linux64) |  -2019
+comparator                            | rtl          | work    |      | 2023.04.112 (Linux64) |  -2019
+subtractor                            | rtl          | work    |      | 2023.04.112 (Linux64) |  -2019
+--------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------
+VHDL Package                                         | Library | Info | Compiler Version      | Compilation Options
+--------------------------------------------------------------------------------------------------------------------
+standard                                             | std     |      |                       | <unavailable>
+TEXTIO                                               | std     |      | 2023.04.112 (Linux64) |  -2019
+std_logic_1164                                       | ieee    |      | 2023.04.112 (Linux64) |  -2008
+NUMERIC_STD                                          | ieee    |      | 2023.04.112 (Linux64) |  -2008
+--------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------
+Library                                              | Comment
+--------------------------------------------------------------------------------------------------------------------
+ieee                                                 | Standard IEEE packages library
+std                                                  | Standard VHDL library
+work                                                 | None
+--------------------------------------------------------------------------------------------------------------------
+
+
+Simulation Options: asim tb_maquina_de_venda_de_bebidas
+
+License to run VHDL performance optimized simulation unavailable.
+
+The performance of simulation is reduced. Version EDU Edition
