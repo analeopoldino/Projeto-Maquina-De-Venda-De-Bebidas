@@ -1,20 +1,26 @@
-Riviera-PRO 2023.04.112.8911(Linux64) 2025-11-19 19:45:48
+Riviera-PRO 2023.04.112.8911(Linux64) 2025-11-20 23:59:05
 
 Elaboration top modules:
-Architecture                  simulacao(tb_maquina_de_venda_de_bebidas)
+Architecture                  tb(tb_maquina_de_venda_de_bebidas)
 
 
 --------------------------------------------------------------------------------------------------------------------
 Entity                                | Architecture | Library | Info | Compiler Version      | Compilation Options
 --------------------------------------------------------------------------------------------------------------------
-tb_maquina_de_venda_de_bebidas        | simulacao    | work    |      | 2023.04.112 (Linux64) |  -2019
+tb_maquina_de_venda_de_bebidas        | tb           | work    |      | 2023.04.112 (Linux64) |  -2019
 maquina_de_venda_de_bebidas_top_level | structural   | work    |      | 2023.04.112 (Linux64) |  -2019
 controller                            | rtl          | work    |      | 2023.04.112 (Linux64) |  -2019
 datapath                              | structural   | work    |      | 2023.04.112 (Linux64) |  -2019
 mux_4to1                              | behavioral   | work    |      | 2023.04.112 (Linux64) |  -2019
 registrador                           | rtl          | work    |      | 2023.04.112 (Linux64) |  -2019
-comparator                            | rtl          | work    |      | 2023.04.112 (Linux64) |  -2019
-subtractor                            | rtl          | work    |      | 2023.04.112 (Linux64) |  -2019
+or_gate                               | dataflow     | work    |      | 2023.04.112 (Linux64) |  -2019
+full_adder_8bits                      | structural   | work    |      | 2023.04.112 (Linux64) |  -2019
+comparator_8bits                      | structural   | work    |      | 2023.04.112 (Linux64) |  -2019
+subtractor_8bits                      | structural   | work    |      | 2023.04.112 (Linux64) |  -2019
+mux_2to1_8bits                        | dataflow     | work    |      | 2023.04.112 (Linux64) |  -2019
+full_adder_1bit                       | structural   | work    |      | 2023.04.112 (Linux64) |  -2019
+half_adder                            | dataflow     | work    |      | 2023.04.112 (Linux64) |  -2019
+comparator_1bit                       | dataflow     | work    |      | 2023.04.112 (Linux64) |  -2019
 --------------------------------------------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------------------------------------------

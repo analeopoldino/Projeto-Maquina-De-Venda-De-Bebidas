@@ -4,148 +4,205 @@
 -- Autores: Ana Luiza Goncalves Leopoldino Marques e Caue Rodrigues Campos
 -- Turma: Laboratorio de Sistemas Digitais - ELT029
 -- Professor: Marconi de Oliveira Junior
--- Data: Novembro de 2025
--- Descricao: Implementacao da unidade de controle (FSM)
+-- Descricao: Implementacao da logica da maquina de estados (FSM)
 -- =======================================================================
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+library ieee;
+use 	ieee.std_logic_1164.all;
+use 	ieee.numeric_std.all;
 
 entity controller is
     port(
-        clk 			  : in std_logic;
-        rst 			  : in std_logic;
-		
-        
-        inserir_moeda 	  : in std_logic;
-        selecionar_bebida : in std_logic;
-        cancelar_operacao : in std_logic;
-        confirmar_compra  : in std_logic;
-        estoque_disponivel: in std_logic;
+        clk                : in std_logic;
+        rst                : in std_logic;
 
-        lt, eq, gt        : in std_logic;
-        resultado_zero    : in std_logic;
-        
-        liberar_bebida    : out std_logic;
-        liberar_retorno   : out std_logic;
-        
-        valor_ld, valor_clr : out std_logic;
-        total_ld, total_clr : out std_logic;
+        -- Entradas de controle
+        inserir_moeda      : in std_logic;
+        selecionar_bebida  : in std_logic;
+        cancelar_operacao  : in std_logic;
+        confirmar_compra   : in std_logic;
+        estoque_disponivel : in std_logic;
+
+        -- Sinais do datapath
+        lt, eq, gt         : in std_logic;
+        resultado_zero     : in std_logic;
+        moeda_valida       : in std_logic;
+
+        -- Saídas de controle (para o datapath)
+        liberar_bebida     : out std_logic;
+        liberar_retorno    : out std_logic;
+
+        valor_ld, valor_clr     : out std_logic;
+        total_ld, total_clr     : out std_logic;
         retorno_ld, retorno_clr : out std_logic;
-        sel_retorno : out std_logic
+
+        sel_retorno : out std_logic;
+        retorno_dec : out std_logic
     );
 end controller;
 
 architecture rtl of controller is
 
+    ---------------------------------------------------------------------
+    -- Declaracao dos estados
+    ---------------------------------------------------------------------
     type Tipo_Estado is (
-        Inicio, -- Estado inicial
-        Espera, -- Esperando o usuario tomar uma decisao
-        Seleciona, -- Escolha da bebida
-        Moeda, -- Inserindo moeda
-        Dispensa, -- Valor suficiente e usuario confirmou a compra
-        Retorno -- 
+        Inicio,
+        Espera,
+        Seleciona,
+        Moeda,
+        Dispensa,
+        Retorno
     );
-    
-    -- Sinais para guardar o estado
+
     signal estado_atual, proximo_estado : Tipo_Estado;
 
+    -- Deteccao de borda da moeda
+    signal moeda_valida_ant : std_logic;
+    signal moeda_edge       : std_logic;
+
 begin
-	-- Logica sequencial
+
+    ---------------------------------------------------------------------
+    -- Registrador de estado (Processo síncrono)
+    ---------------------------------------------------------------------
     process(clk, rst)
     begin
         if rst = '1' then
-            estado_atual <= Inicio;
+            estado_atual      <= Inicio;
+            moeda_valida_ant  <= '0';
+
         elsif rising_edge(clk) then
-            estado_atual <= proximo_estado;
+            estado_atual      <= proximo_estado;
+            moeda_valida_ant  <= moeda_valida;
         end if;
     end process;
-	
-    -- Logica combinacional, para decidir qual devem ser as saidas 
-    process(estado_atual, inserir_moeda, selecionar_bebida, cancelar_operacao,
-            confirmar_compra, estoque_disponivel, lt, eq, gt, resultado_zero)
+
+    ---------------------------------------------------------------------
+    -- Detecção de borda de subida da moeda válida
+    ---------------------------------------------------------------------
+    moeda_edge <= '1' when (moeda_valida = '1' and moeda_valida_ant = '0') else '0';
+
+    ---------------------------------------------------------------------
+    -- FSM (Processo combinacional)
+    ---------------------------------------------------------------------
+    process(
+        estado_atual,
+        inserir_moeda, selecionar_bebida, cancelar_operacao,
+        confirmar_compra, estoque_disponivel,
+        lt, eq, gt, resultado_zero, moeda_edge
+    )
     begin
-        liberar_bebida <= '0';
-        liberar_retorno <= '0';
 
-        valor_ld <= '0';
-        valor_clr <= '0';
-        total_ld <= '0';
-        total_clr <= '0';
-        retorno_ld <= '0';
-        retorno_clr <= '0';
+        -- =======================
+        -- Valores default
+        -- =======================
+        liberar_bebida   <= '0';
+        liberar_retorno  <= '0';
 
-        sel_retorno <= '0';
-		
-        -- Logica da FSM
+        valor_ld         <= '0';
+        valor_clr        <= '0';
+        total_ld         <= '0';
+        total_clr        <= '0';
+
+        retorno_ld       <= '0';
+        retorno_clr      <= '0';
+        retorno_dec      <= '0';
+
+        sel_retorno      <= '0';
+
+        proximo_estado   <= estado_atual;
+
+        -- =======================
+        -- Máquina de estados
+        -- =======================
         case estado_atual is
-			
-            
-            -- Estado inicial
+
+            ------------------------------------------------------------------
+            -- Estado de inicializacao
+            ------------------------------------------------------------------
             when Inicio =>
                 valor_clr   <= '1';
                 total_clr   <= '1';
                 retorno_clr <= '1';
                 proximo_estado <= Espera;
-			
-            -- Estado de espera, aguardando decisao do usuario
+
+            ------------------------------------------------------------------
+            -- Aguarda selecao de bebida
+            ------------------------------------------------------------------
             when Espera =>
                 if selecionar_bebida = '1' then
                     proximo_estado <= Seleciona;
-                else
-                    proximo_estado <= Espera;
                 end if;
-                
-			-- Estado de selecionar bebida, aguardando insercao de moeda ou 				cancelamento
+
+            ------------------------------------------------------------------
+            -- Selecao da bebida
+            ------------------------------------------------------------------
             when Seleciona =>
                 if cancelar_operacao = '1' then
                     proximo_estado <= Inicio;
+
                 elsif inserir_moeda = '1' and estoque_disponivel = '1' then
                     valor_ld <= '1';
                     proximo_estado <= Moeda;
+
                 elsif inserir_moeda = '1' and estoque_disponivel = '0' then
                     proximo_estado <= Espera;
-                else
-                    proximo_estado <= Seleciona;
                 end if;
-			
-            -- Estado de insercao de moedas, usuario pode cancelar, verifica se 			o total de moedas  e >= valor da bebida
+
+            ------------------------------------------------------------------
+            -- Recebendo moedas
+            ------------------------------------------------------------------
             when Moeda =>
                 if cancelar_operacao = '1' then
                     sel_retorno <= '1';
-                    retorno_ld <= '1';
+                    retorno_ld  <= '1';
                     proximo_estado <= Retorno;
 
-                elsif inserir_moeda = '1' then
+                elsif moeda_edge = '1' and inserir_moeda = '1' and lt = '1' then
                     total_ld <= '1';
                     proximo_estado <= Moeda;
 
                 elsif confirmar_compra = '1' and (eq = '1' or gt = '1') then
                     proximo_estado <= Dispensa;
-
-                else
-                    proximo_estado <= Moeda;
                 end if;
-			
-            -- 
+
+            ------------------------------------------------------------------
+            -- Dispensa da bebida
+            ------------------------------------------------------------------
             when Dispensa =>
-                liberar_bebida <= '1';
-                
-                if gt = '1' then
-                    sel_retorno <= '0';
-                    retorno_ld <= '1';
-                    proximo_estado <= Retorno;
-                elsif eq = '1' then
-                    proximo_estado <= Inicio;
+                if confirmar_compra = '1' then
+                    liberar_bebida <= '0';
+                    proximo_estado  <= Dispensa;
+
+                else
+                    liberar_bebida <= '1';
+
+                    if gt = '1' then
+                        sel_retorno <= '0';
+                        retorno_ld  <= '1';
+                        proximo_estado <= Retorno;
+
+                    else
+                        proximo_estado <= Inicio;
+                    end if;
                 end if;
 
+            ------------------------------------------------------------------
+            -- Devolvendo troco
+            ------------------------------------------------------------------
             when Retorno =>
-                liberar_retorno <= '1';
-                if resultado_zero = '1' then
-                    proximo_estado <= Inicio;
+                if cancelar_operacao = '1' then
+                    liberar_retorno <= '0';
+
                 else
-                    proximo_estado <= Retorno;
+                    liberar_retorno <= '1';
+
+                    if resultado_zero = '0' then
+                        retorno_dec <= '1';
+                    else
+                        proximo_estado <= Inicio;
+                    end if;
                 end if;
         end case;
     end process;
