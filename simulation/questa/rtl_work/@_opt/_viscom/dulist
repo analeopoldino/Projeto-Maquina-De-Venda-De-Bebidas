@@ -1,0 +1,5 @@
+1 10 half_adder 8 dataflow 65 /home/analu/Downloads/Proj-Maq_Bebidas/simulation/questa/rtl_work 1 65 0 0 12 0
+1 7 or_gate 8 dataflow 65 /home/analu/Downloads/Proj-Maq_Bebidas/simulation/questa/rtl_work 1 65 0 0 7 0
+1 15 full_adder_1bit 10 structural 65 /home/analu/Downloads/Proj-Maq_Bebidas/simulation/questa/rtl_work 1 65 0 0 51 0
+1 16 full_adder_8bits 10 structural 65 /home/analu/Downloads/Proj-Maq_Bebidas/simulation/questa/rtl_work 1 65 0 0 66 0
+1 21 tb_somador_acumulador 3 sim 65 /home/analu/Downloads/Proj-Maq_Bebidas/simulation/questa/rtl_work 1 65 0 0 166 0

@@ -1,0 +1,709 @@
+m255
+K4
+z2
+!s12c _opt
+Z0 !s99 nomlopt
+!s11e vcom 2025.2 2025.05, May 31 2025
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z1 d/home/analu/Downloads/Proj-Maq_Bebidas/simulation/questa
+T_opt
+!i145 1
+!i144 0
+!s110 1764131468
+VFK502mfNE:WXah<dCXdJW2
+04 21 3 work tb_somador_acumulador sim 1
+=1-702c1f08c16a-6926828b-d7653-103af
+R0
+!s12f OEM100
+!s12b OEM100
+!s124 OEM10U34 
+!s135 nogc
+o-quiet -auto_acc_if_foreign -work work -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work +acc
+tCvgOpt 0
+n@_opt
+OL;O;2025.2;82
+Ecomparator_1bit
+Z2 w1764111112
+Z3 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 8
+R1
+Z6 8/home/analu/Downloads/Proj-Maq_Bebidas/comparator_8-bits.vhd
+Z7 F/home/analu/Downloads/Proj-Maq_Bebidas/comparator_8-bits.vhd
+l0
+L17 1
+VS6OPE5LH0^hn[m`6Gc=?e2
+!s100 ]MfVJ@jS3MW^m`D8A7?TW3
+Z8 OL;C;2025.2;82
+31
+Z9 !s110 1764131467
+!i10b 1
+Z10 !s108 1764131467.000000
+Z11 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/comparator_8-bits.vhd|
+Z12 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/comparator_8-bits.vhd|
+!i113 0
+Z13 o-93 -work work
+Z14 tExplicit 1 CvgOpt 0
+Adataflow
+R3
+R4
+R5
+DEx4 work 15 comparator_1bit 0 22 S6OPE5LH0^hn[m`6Gc=?e2
+!i122 8
+l31
+L30 7
+V@Yoo4O4TOkVQOYoUz[VBY0
+!s100 =d;h[g532=SW?i1nfWl4L3
+R8
+31
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 0
+R13
+R14
+Ecomparator_8bits
+R2
+R3
+R4
+R5
+!i122 8
+R1
+R6
+R7
+l0
+L45 1
+V4Gn1a_V?3bCJ?L9@giHfW0
+!s100 ;f6aF12Eak^OkX[50LAXV1
+R8
+31
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 0
+R13
+R14
+Astructural
+R3
+R4
+R5
+DEx4 work 16 comparator_8bits 0 22 4Gn1a_V?3bCJ?L9@giHfW0
+!i122 8
+l73
+L55 48
+V0M]JYT0T^I>3W;m4HMlDb3
+!s100 IQY@c:2^E`9YZ]QhfL?A[2
+R8
+31
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 0
+R13
+R14
+Econtroller
+R2
+R3
+R4
+R5
+!i122 7
+R1
+Z15 8/home/analu/Downloads/Proj-Maq_Bebidas/Controller.vhd
+Z16 F/home/analu/Downloads/Proj-Maq_Bebidas/Controller.vhd
+l0
+Z17 L14 1
+V9kzl2=oPF2Nm5_3f]nKn=0
+!s100 GW2@?94W]FAoeVC0b]>jE1
+R8
+31
+R9
+!i10b 1
+R10
+Z18 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/Controller.vhd|
+Z19 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/Controller.vhd|
+!i113 0
+R13
+R14
+Artl
+R3
+R4
+R5
+DEx4 work 10 controller 0 22 9kzl2=oPF2Nm5_3f]nKn=0
+!i122 7
+l64
+L44 166
+V4F;HY>:bH0jf2GTYEKbzE1
+!s100 7>>DlZWi3OXfIJm]iY2bW2
+R8
+31
+R9
+!i10b 1
+R10
+R18
+R19
+!i113 0
+R13
+R14
+Edatapath
+R2
+R3
+R4
+R5
+!i122 6
+R1
+Z20 8/home/analu/Downloads/Proj-Maq_Bebidas/Datapath.vhd
+Z21 F/home/analu/Downloads/Proj-Maq_Bebidas/Datapath.vhd
+l0
+R17
+VdPmMh9AYaR;7_2G=e:bKd0
+!s100 oRlJ0IWi`^PoTzc=Qbgmc2
+R8
+31
+R9
+!i10b 1
+Z22 !s108 1764131466.000000
+Z23 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/Datapath.vhd|
+Z24 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/Datapath.vhd|
+!i113 0
+R13
+R14
+Astructural
+R3
+R4
+R5
+DEx4 work 8 datapath 0 22 dPmMh9AYaR;7_2G=e:bKd0
+!i122 6
+l123
+L35 229
+V;QT81`DfXBFlNhdmXTUUS2
+!s100 =4i;5Mg<Wzeg1Mn0[XNa52
+R8
+31
+R9
+!i10b 1
+R22
+R23
+R24
+!i113 0
+R13
+R14
+Ede10_top_level
+Z25 w1764126182
+R3
+R4
+R5
+!i122 5
+R1
+Z26 8/home/analu/Downloads/Proj-Maq_Bebidas/design-fpga.vhd
+Z27 F/home/analu/Downloads/Proj-Maq_Bebidas/design-fpga.vhd
+l0
+Z28 L13 1
+VJOSOJ^P45`hdWjNLNKa5V3
+!s100 OWdjC6[_mbF>8Z<HgSF3A2
+R8
+31
+Z29 !s110 1764131466
+!i10b 1
+R22
+Z30 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/design-fpga.vhd|
+Z31 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/design-fpga.vhd|
+!i113 0
+R13
+R14
+Astructural
+R3
+R4
+R5
+DEx4 work 14 de10_top_level 0 22 JOSOJ^P45`hdWjNLNKa5V3
+!i122 5
+l61
+L29 77
+V<BR5Pf_EdQQLRC6X10Pz`1
+!s100 Z2A@KHIL0[V=Mg1LU[SCL2
+R8
+31
+R29
+!i10b 1
+R22
+R30
+R31
+!i113 0
+R13
+R14
+Edivisorclock
+Z32 w1764116105
+R3
+R4
+R5
+!i122 11
+R1
+Z33 8/home/analu/Downloads/Proj-Maq_Bebidas/clock.vhd
+Z34 F/home/analu/Downloads/Proj-Maq_Bebidas/clock.vhd
+l0
+R17
+Vj26JU@l7YHYb<QgaQB5_`1
+!s100 =>CC4M:3@bo=PZLkOR1f;0
+R8
+31
+R9
+!i10b 1
+R10
+Z35 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/clock.vhd|
+Z36 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/clock.vhd|
+!i113 0
+R13
+R14
+Artl
+R3
+R4
+R5
+DEx4 work 12 divisorclock 0 22 j26JU@l7YHYb<QgaQB5_`1
+!i122 11
+l25
+L23 20
+VfF2:k3R5`LZo5bZ0DP73J3
+!s100 A2`JSETmM<jXKO0W;3od`1
+R8
+31
+R9
+!i10b 1
+R10
+R35
+R36
+!i113 0
+R13
+R14
+Efull_adder_1bit
+R2
+R4
+R5
+!i122 9
+R1
+Z37 8/home/analu/Downloads/Proj-Maq_Bebidas/basic_components.vhd
+Z38 F/home/analu/Downloads/Proj-Maq_Bebidas/basic_components.vhd
+l0
+L55 1
+V03PgET@;?TE2:Ka5C2`Ta1
+!s100 N3:z^[jT@z1AgMmBlFB390
+R8
+31
+R9
+!i10b 1
+R10
+Z39 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/basic_components.vhd|
+Z40 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/basic_components.vhd|
+!i113 0
+R13
+R14
+Astructural
+R4
+R5
+DEx4 work 15 full_adder_1bit 0 22 03PgET@;?TE2:Ka5C2`Ta1
+!i122 9
+l85
+L65 25
+VJWYj8XYTBQ=_^JMD0[ll52
+!s100 60WV_ggV7zS5^7Fn]4ZjC1
+R8
+31
+R9
+!i10b 1
+R10
+R39
+R40
+!i113 0
+R13
+R14
+Efull_adder_8bits
+R2
+R3
+R4
+R5
+!i122 10
+R1
+Z41 8/home/analu/Downloads/Proj-Maq_Bebidas/adder_8-bits.vhd
+Z42 F/home/analu/Downloads/Proj-Maq_Bebidas/adder_8-bits.vhd
+l0
+R17
+VXFJG4AV4o^l5Y=j^22>n33
+!s100 lzCKo9V]=aUfVEUinT8OR3
+R8
+31
+R9
+!i10b 1
+R10
+Z43 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/adder_8-bits.vhd|
+Z44 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/adder_8-bits.vhd|
+!i113 0
+R13
+R14
+Astructural
+R3
+R4
+R5
+DEx4 work 16 full_adder_8bits 0 22 XFJG4AV4o^l5Y=j^22>n33
+!i122 10
+l36
+L22 28
+V>OYACRO3aZ4d<;VlH8oXz1
+!s100 VOGOIZ_[7eMboC]J^WG3j1
+R8
+31
+R9
+!i10b 1
+R10
+R43
+R44
+!i113 0
+R13
+R14
+Ehalf_adder
+R2
+R4
+R5
+!i122 9
+R1
+R37
+R38
+l0
+L16 1
+VBz6>6N6WcP`QXm0Sdc7AF0
+!s100 Ha9oEY@UJnkb0k6edW=mk2
+R8
+31
+R9
+!i10b 1
+R10
+R39
+R40
+!i113 0
+R13
+R14
+Adataflow
+R4
+R5
+DEx4 work 10 half_adder 0 22 Bz6>6N6WcP`QXm0Sdc7AF0
+!i122 9
+l26
+L25 5
+Vez1c<A^jCme3<Sgmzkkic0
+!s100 NW7FzjDfa_^=o_z0amg>l2
+R8
+31
+R9
+!i10b 1
+R10
+R39
+R40
+!i113 0
+R13
+R14
+Emaquina_de_venda_de_bebidas_top_level
+R2
+R3
+R4
+R5
+!i122 4
+R1
+Z45 8/home/analu/Downloads/Proj-Maq_Bebidas/design.vhd
+Z46 F/home/analu/Downloads/Proj-Maq_Bebidas/design.vhd
+l0
+R17
+VC>OlFTIR2=]e4KfDDeijo0
+!s100 [jLnKUZ2>g@1ZR6g0mc>L2
+R8
+31
+R29
+!i10b 1
+R22
+Z47 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/design.vhd|
+Z48 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/design.vhd|
+!i113 0
+R13
+R14
+Astructural
+R3
+R4
+R5
+DEx4 work 37 maquina_de_venda_de_bebidas_top_level 0 22 C>OlFTIR2=]e4KfDDeijo0
+!i122 4
+l96
+L34 127
+V_NnnUIndgdzG=SJ`MF^;M1
+!s100 fI8V2Dj[41HfaOdD^F_YQ0
+R8
+31
+R29
+!i10b 1
+R22
+R47
+R48
+!i113 0
+R13
+R14
+Emux_2to1_8bits
+R2
+R4
+R5
+!i122 3
+R1
+Z49 8/home/analu/Downloads/Proj-Maq_Bebidas/mux_2-to-1.vhd
+Z50 F/home/analu/Downloads/Proj-Maq_Bebidas/mux_2-to-1.vhd
+l0
+R28
+VWlkRRKTD6HADli6WE[0Gm0
+!s100 oMX_AYkHY83^JH5m@<PmL0
+R8
+31
+R29
+!i10b 1
+R22
+Z51 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/mux_2-to-1.vhd|
+Z52 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/mux_2-to-1.vhd|
+!i113 0
+R13
+R14
+Adataflow
+R4
+R5
+DEx4 work 14 mux_2to1_8bits 0 22 WlkRRKTD6HADli6WE[0Gm0
+!i122 3
+l23
+L22 5
+VQBaRh0>5oko9QcQ;QW9X]3
+!s100 W@8YaKz5<a>QSzOPB@[0a2
+R8
+31
+R29
+!i10b 1
+R22
+R51
+R52
+!i113 0
+R13
+R14
+Emux_4to1
+R2
+R3
+R4
+R5
+!i122 2
+R1
+Z53 8/home/analu/Downloads/Proj-Maq_Bebidas/mux_4-to-1.vhd
+Z54 F/home/analu/Downloads/Proj-Maq_Bebidas/mux_4-to-1.vhd
+l0
+R17
+VVKM?ZYVQaR6okklPmDkW53
+!s100 z:0ZC1aKgi>RmnIcI58MU2
+R8
+31
+R29
+!i10b 1
+R22
+Z55 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/mux_4-to-1.vhd|
+Z56 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/mux_4-to-1.vhd|
+!i113 0
+R13
+R14
+Abehavioral
+R3
+R4
+R5
+DEx4 work 8 mux_4to1 0 22 VKM?ZYVQaR6okklPmDkW53
+!i122 2
+l26
+L25 13
+V890OEe2Q4`Y7`<K;eF[o82
+!s100 KKTF7M0bW=UokYVj5;1YI1
+R8
+31
+R29
+!i10b 1
+R22
+R55
+R56
+!i113 0
+R13
+R14
+Eor_gate
+R2
+R4
+R5
+!i122 9
+R1
+R37
+R38
+l0
+L37 1
+VeT0UnAd=om[KV0NzJH2Z`3
+!s100 SK]N64YnEm]o7o?g5A1aZ2
+R8
+31
+R9
+!i10b 1
+R10
+R39
+R40
+!i113 0
+R13
+R14
+Adataflow
+R4
+R5
+DEx4 work 7 or_gate 0 22 eT0UnAd=om[KV0NzJH2Z`3
+!i122 9
+l45
+L44 4
+VC6BhAW_N2:VaPV0QBPQ:92
+!s100 <D@7Xk^Gz;QKSn7[hNaNj0
+R8
+31
+R9
+!i10b 1
+R10
+R39
+R40
+!i113 0
+R13
+R14
+Eregistrador
+R2
+R3
+R4
+R5
+!i122 0
+R1
+Z57 8/home/analu/Downloads/Proj-Maq_Bebidas/register_n-bits.vhd
+Z58 F/home/analu/Downloads/Proj-Maq_Bebidas/register_n-bits.vhd
+l0
+R17
+VdC@?54Udza7WGlZXiS2c82
+!s100 1iQKi7V16J_9F6UY8No1b2
+R8
+31
+R29
+!i10b 1
+R22
+Z59 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/register_n-bits.vhd|
+Z60 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/register_n-bits.vhd|
+!i113 0
+R13
+R14
+Artl
+R3
+R4
+R5
+DEx4 work 11 registrador 0 22 dC@?54Udza7WGlZXiS2c82
+!i122 0
+l27
+L26 13
+V8W9AS[SKAKRF=aHm<N_mR1
+!s100 1U=LUz:l`Ui4V2R2bKcBQ2
+R8
+31
+R29
+!i10b 1
+R22
+R59
+R60
+!i113 0
+R13
+R14
+Esubtractor_8bits
+R2
+R3
+R4
+R5
+!i122 1
+R1
+Z61 8/home/analu/Downloads/Proj-Maq_Bebidas/subtractor_8-bits.vhd
+Z62 F/home/analu/Downloads/Proj-Maq_Bebidas/subtractor_8-bits.vhd
+l0
+R17
+V1>SjXD>]kjgkk6[IYG_KT1
+!s100 8A8TaE=[?k@HdVki5P?2U3
+R8
+31
+R29
+!i10b 1
+R22
+Z63 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/subtractor_8-bits.vhd|
+Z64 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/subtractor_8-bits.vhd|
+!i113 0
+R13
+R14
+Astructural
+R3
+R4
+R5
+DEx4 work 16 subtractor_8bits 0 22 1>SjXD>]kjgkk6[IYG_KT1
+!i122 1
+l37
+L22 31
+VMolkdCT`N6lEolk1dMGET2
+!s100 i^jPl04lXb?VkYMUf9OU21
+R8
+31
+R29
+!i10b 1
+R22
+R63
+R64
+!i113 0
+R13
+R14
+Etb_somador_acumulador
+Z65 w1764131018
+R3
+R4
+R5
+!i122 12
+R1
+Z66 8/home/analu/Downloads/Proj-Maq_Bebidas/testbench_somadora_e_registrador.vhd
+Z67 F/home/analu/Downloads/Proj-Maq_Bebidas/testbench_somadora_e_registrador.vhd
+l0
+L5 1
+V:EhMIC5=Qnk0WSno>dh`G1
+!s100 <lTDfo`n7H]n<2aTHkY3d1
+R8
+31
+R9
+!i10b 1
+R10
+Z68 !s90 -reportprogress|300|-93|-work|work|/home/analu/Downloads/Proj-Maq_Bebidas/testbench_somadora_e_registrador.vhd|
+Z69 !s107 /home/analu/Downloads/Proj-Maq_Bebidas/testbench_somadora_e_registrador.vhd|
+!i113 0
+R13
+R14
+Asim
+R3
+R4
+R5
+DEx4 work 21 tb_somador_acumulador 0 22 :EhMIC5=Qnk0WSno>dh`G1
+!i122 12
+l36
+L9 139
+VB7Ie`H]>hQ_7UDO]IE>HA0
+!s100 Ia1VU5FO0>M^YiPBh:X3X1
+R8
+31
+R9
+!i10b 1
+R10
+R68
+R69
+!i113 0
+R13
+R14
