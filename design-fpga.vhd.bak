@@ -1,0 +1,85 @@
+-- ===========================================================================================
+-- Projeto RTL: Maquina de venda de bebidas
+-- Arquivo: design.vhd
+-- Autores: Ana Luiza Goncalves Leopoldino Marques e Caue Rodrigues Campos
+-- Turma: Laboratorio de Sistemas Digitais - ELT029
+-- Professor: Marconi de Oliveira Junior
+-- Descricao: Implementacao do top level que realiza a conexao com a placa fpga
+-- ============================================================================================
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity DE10_Standard_TOP is
+    port (
+        -- Clock (50 MHz)
+        CLOCK_50 : in std_logic;
+
+        -- Botões (KEY 3..0) - 0 = Pressionado, 1 = Solto
+        KEY      : in std_logic_vector(3 downto 0);
+
+        -- Chaves (SW 9..0) - 0 = Baixo, 1 = Alto
+        SW       : in std_logic_vector(9 downto 0);
+
+        -- LEDs (LEDR 9..0) - 1 = Aceso
+        LEDR     : out std_logic_vector(9 downto 0)
+    );
+end entity;
+
+architecture structural of DE10_Standard_TOP is
+
+    -- Declaração do seu projeto principal (o design.vhd atual)
+    component maquina_de_venda_de_bebidas_top_level
+        port (
+            clk                : in std_logic;
+            rst                : in std_logic;
+            inserir_moeda      : in std_logic;
+            selecionar_bebida  : in std_logic;
+            selecao_bebida     : in std_logic_vector(1 downto 0);
+            cancelar_operacao  : in std_logic;
+            confirmar_compra   : in std_logic;
+            valor_moeda        : in unsigned(3 downto 0);
+            estoque_disponivel : in std_logic;
+            liberar_bebida     : out std_logic;
+            liberar_retorno    : out std_logic
+        );
+    end component;
+
+    -- Sinais para inverter os botões (Active Low -> Active High)
+    signal rst_inv, sel_inv, conf_inv, canc_inv : std_logic;
+
+begin
+
+    -- 1. Tratamento dos Botões (Inversão)
+    -- Na DE10, apertar gera '0'. Seu código espera '1'.
+    rst_inv  <= not KEY(0); -- Reset
+    sel_inv  <= not KEY(1); -- Selecionar
+    conf_inv <= not KEY(2); -- Confirmar
+    canc_inv <= not KEY(3); -- Cancelar
+
+    -- 2. Conexão com a Máquina
+    U_Maquina : maquina_de_venda_de_bebidas_top_level
+        port map (
+            clk => CLOCK_50,
+            rst => rst_inv,
+
+            -- Chaves (Switches)
+            inserir_moeda      => SW(0),           -- SW0 liga o modo inserção
+            estoque_disponivel => SW(1),           -- SW1 define estoque
+            selecao_bebida     => SW(3 downto 2),  -- SW3 e SW2 escolhem a bebida
+            valor_moeda        => unsigned(SW(7 downto 4)), -- SW7..4 definem o valor
+
+            -- Botões (Keys)
+            selecionar_bebida  => sel_inv,
+            confirmar_compra   => conf_inv,
+            cancelar_operacao  => canc_inv,
+
+            -- Saídas (LEDs)
+            liberar_bebida     => LEDR(0),
+            liberar_retorno    => LEDR(1)
+        );
+
+    -- Apaga os LEDs que sobraram
+    LEDR(9 downto 2) <= (others => '0');
+
+end architecture;

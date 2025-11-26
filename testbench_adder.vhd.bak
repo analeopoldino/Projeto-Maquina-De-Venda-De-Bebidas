@@ -15,7 +15,7 @@ entity tb_adder is
 end entity;
 
 architecture sim of tb_adder is
-    component full_adder_8bits
+    component full_adder
         port (
             a, b : in std_logic_vector(7 downto 0);
             s    : out std_logic_vector(7 downto 0)
@@ -24,7 +24,7 @@ architecture sim of tb_adder is
 
     signal s_a, s_b, s_s : std_logic_vector(7 downto 0);
 begin
-    DUT: full_adder_8bits port map (a => s_a, b => s_b, s => s_s);
+    DUT: full_adder port map (a => s_a, b => s_b, s => s_s);
 
     process
     begin

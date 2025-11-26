@@ -159,7 +159,7 @@ begin
                     retorno_ld  <= '1';
                     proximo_estado <= Retorno;
 
-                elsif moeda_edge = '1' and inserir_moeda = '1' and lt = '1' then
+                elsif moeda_edge = '1' and inserir_moeda = '1' then
                     total_ld <= '1';
                     proximo_estado <= Moeda;
 
