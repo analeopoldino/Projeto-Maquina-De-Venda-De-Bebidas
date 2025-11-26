@@ -1,0 +1,1467 @@
+|DE10_TOP_LEVEL
+CLOCK_50 => DivisorClock:U_Divisor.CLOCK_50MHz
+KEY[0] => maquina_de_venda_de_bebidas_top_level:U_Maquina.selecionar_bebida
+KEY[0] => maquina_de_venda_de_bebidas_top_level:U_Maquina.confirmar_compra
+KEY[1] => maquina_de_venda_de_bebidas_top_level:U_Maquina.cancelar_operacao
+KEY[2] => ~NO_FANOUT~
+KEY[3] => ~NO_FANOUT~
+SW[0] => maquina_de_venda_de_bebidas_top_level:U_Maquina.inserir_moeda
+SW[1] => maquina_de_venda_de_bebidas_top_level:U_Maquina.estoque_disponivel
+SW[2] => maquina_de_venda_de_bebidas_top_level:U_Maquina.selecao_bebida[0]
+SW[3] => maquina_de_venda_de_bebidas_top_level:U_Maquina.selecao_bebida[1]
+SW[4] => maquina_de_venda_de_bebidas_top_level:U_Maquina.valor_moeda[0]
+SW[5] => maquina_de_venda_de_bebidas_top_level:U_Maquina.valor_moeda[1]
+SW[6] => maquina_de_venda_de_bebidas_top_level:U_Maquina.valor_moeda[2]
+SW[7] => maquina_de_venda_de_bebidas_top_level:U_Maquina.valor_moeda[3]
+SW[8] => ~NO_FANOUT~
+SW[9] => DivisorClock:U_Divisor.reset
+SW[9] => maquina_de_venda_de_bebidas_top_level:U_Maquina.rst
+LEDR[0] << maquina_de_venda_de_bebidas_top_level:U_Maquina.liberar_bebida
+LEDR[1] << maquina_de_venda_de_bebidas_top_level:U_Maquina.liberar_retorno
+LEDR[2] << <GND>
+LEDR[3] << <GND>
+LEDR[4] << <GND>
+LEDR[5] << <GND>
+LEDR[6] << <GND>
+LEDR[7] << <GND>
+LEDR[8] << <GND>
+LEDR[9] << <GND>
+
+
+|DE10_TOP_LEVEL|DivisorClock:U_Divisor
+CLOCK_50MHz => clk.CLK
+CLOCK_50MHz => cnt[0].CLK
+CLOCK_50MHz => cnt[1].CLK
+CLOCK_50MHz => cnt[2].CLK
+CLOCK_50MHz => cnt[3].CLK
+CLOCK_50MHz => cnt[4].CLK
+CLOCK_50MHz => cnt[5].CLK
+CLOCK_50MHz => cnt[6].CLK
+CLOCK_50MHz => cnt[7].CLK
+CLOCK_50MHz => cnt[8].CLK
+CLOCK_50MHz => cnt[9].CLK
+CLOCK_50MHz => cnt[10].CLK
+CLOCK_50MHz => cnt[11].CLK
+CLOCK_50MHz => cnt[12].CLK
+CLOCK_50MHz => cnt[13].CLK
+CLOCK_50MHz => cnt[14].CLK
+CLOCK_50MHz => cnt[15].CLK
+CLOCK_50MHz => cnt[16].CLK
+CLOCK_50MHz => cnt[17].CLK
+CLOCK_50MHz => cnt[18].CLK
+CLOCK_50MHz => cnt[19].CLK
+CLOCK_50MHz => cnt[20].CLK
+CLOCK_50MHz => cnt[21].CLK
+CLOCK_50MHz => cnt[22].CLK
+CLOCK_50MHz => cnt[23].CLK
+CLOCK_50MHz => cnt[24].CLK
+reset => cnt[0].ACLR
+reset => cnt[1].ACLR
+reset => cnt[2].ACLR
+reset => cnt[3].ACLR
+reset => cnt[4].ACLR
+reset => cnt[5].ACLR
+reset => cnt[6].ACLR
+reset => cnt[7].ACLR
+reset => cnt[8].ACLR
+reset => cnt[9].ACLR
+reset => cnt[10].ACLR
+reset => cnt[11].ACLR
+reset => cnt[12].ACLR
+reset => cnt[13].ACLR
+reset => cnt[14].ACLR
+reset => cnt[15].ACLR
+reset => cnt[16].ACLR
+reset => cnt[17].ACLR
+reset => cnt[18].ACLR
+reset => cnt[19].ACLR
+reset => cnt[20].ACLR
+reset => cnt[21].ACLR
+reset => cnt[22].ACLR
+reset => cnt[23].ACLR
+reset => cnt[24].ACLR
+reset => clk.ENA
+CLOCK_1Hz <= clk.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina
+clk => controller:U_Controller.clk
+clk => datapath:U_Datapath.clk
+rst => controller:U_Controller.rst
+rst => datapath:U_Datapath.rst
+inserir_moeda => controller:U_Controller.inserir_moeda
+selecionar_bebida => controller:U_Controller.selecionar_bebida
+selecao_bebida[0] => datapath:U_Datapath.selecao_bebida[0]
+selecao_bebida[1] => datapath:U_Datapath.selecao_bebida[1]
+cancelar_operacao => controller:U_Controller.cancelar_operacao
+confirmar_compra => controller:U_Controller.confirmar_compra
+valor_moeda[0] => datapath:U_Datapath.valor_moeda[0]
+valor_moeda[1] => datapath:U_Datapath.valor_moeda[1]
+valor_moeda[2] => datapath:U_Datapath.valor_moeda[2]
+valor_moeda[3] => datapath:U_Datapath.valor_moeda[3]
+estoque_disponivel => controller:U_Controller.estoque_disponivel
+liberar_bebida <= controller:U_Controller.liberar_bebida
+liberar_retorno <= controller:U_Controller.liberar_retorno
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|controller:U_Controller
+clk => moeda_valida_ant.CLK
+clk => estado_atual~1.DATAIN
+rst => moeda_valida_ant.ACLR
+rst => estado_atual~3.DATAIN
+inserir_moeda => process_1.IN0
+inserir_moeda => process_1.IN0
+inserir_moeda => process_1.IN1
+selecionar_bebida => proximo_estado.OUTPUTSELECT
+selecionar_bebida => proximo_estado.OUTPUTSELECT
+selecionar_bebida => proximo_estado.OUTPUTSELECT
+selecionar_bebida => proximo_estado.OUTPUTSELECT
+selecionar_bebida => proximo_estado.OUTPUTSELECT
+selecionar_bebida => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => valor_ld.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => total_ld.OUTPUTSELECT
+cancelar_operacao => retorno_dec.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => proximo_estado.OUTPUTSELECT
+cancelar_operacao => sel_retorno.DATAB
+cancelar_operacao => Selector6.IN3
+cancelar_operacao => liberar_retorno.DATAB
+confirmar_compra => process_1.IN1
+confirmar_compra => proximo_estado.OUTPUTSELECT
+confirmar_compra => retorno_ld.OUTPUTSELECT
+confirmar_compra => Selector4.IN5
+confirmar_compra => liberar_bebida.DATAB
+estoque_disponivel => process_1.IN1
+estoque_disponivel => process_1.IN1
+lt => ~NO_FANOUT~
+eq => process_1.IN0
+gt => process_1.IN1
+gt => retorno_ld.DATAA
+gt => proximo_estado.DATAA
+resultado_zero => proximo_estado.OUTPUTSELECT
+resultado_zero => proximo_estado.OUTPUTSELECT
+resultado_zero => proximo_estado.OUTPUTSELECT
+resultado_zero => proximo_estado.OUTPUTSELECT
+resultado_zero => proximo_estado.OUTPUTSELECT
+resultado_zero => proximo_estado.OUTPUTSELECT
+resultado_zero => retorno_dec.DATAA
+moeda_valida => moeda_edge.IN1
+moeda_valida => moeda_valida_ant.DATAIN
+liberar_bebida <= liberar_bebida.DB_MAX_OUTPUT_PORT_TYPE
+liberar_retorno <= liberar_retorno.DB_MAX_OUTPUT_PORT_TYPE
+valor_ld <= valor_ld.DB_MAX_OUTPUT_PORT_TYPE
+valor_clr <= valor_clr.DB_MAX_OUTPUT_PORT_TYPE
+total_ld <= total_ld.DB_MAX_OUTPUT_PORT_TYPE
+total_clr <= total_clr.DB_MAX_OUTPUT_PORT_TYPE
+retorno_ld <= Selector6.DB_MAX_OUTPUT_PORT_TYPE
+retorno_clr <= retorno_clr.DB_MAX_OUTPUT_PORT_TYPE
+sel_retorno <= sel_retorno.DB_MAX_OUTPUT_PORT_TYPE
+retorno_dec <= retorno_dec.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath
+clk => registrador:U_RegPreco.clk
+clk => registrador:U_RegMoedaInput.clk
+clk => registrador:U_RegTotal.clk
+clk => registrador:U_RegRet.clk
+rst => registrador:U_RegPreco.rst
+rst => registrador:U_RegMoedaInput.rst
+rst => registrador:U_RegTotal.rst
+rst => registrador:U_RegRet.rst
+valor_ld => registrador:U_RegPreco.ld
+valor_clr => registrador:U_RegPreco.clr
+total_ld => registrador:U_RegTotal.ld
+total_clr => registrador:U_RegTotal.clr
+retorno_ld => mux_2to1_8bits:U_MuxLd.sel
+retorno_ld => or_gate:U_OR_WEN.X
+retorno_clr => registrador:U_RegRet.clr
+sel_retorno => mux_2to1_8bits:U_MuxRetSrc.sel
+retorno_dec => mux_2to1_8bits:U_MuxDec.sel
+retorno_dec => or_gate:U_OR_WEN.Y
+selecao_bebida[0] => mux_4to1:U_MuxPreco.sel_2bits[0]
+selecao_bebida[1] => mux_4to1:U_MuxPreco.sel_2bits[1]
+valor_moeda[0] => registrador:U_RegMoedaInput.d[0]
+valor_moeda[1] => registrador:U_RegMoedaInput.d[1]
+valor_moeda[2] => registrador:U_RegMoedaInput.d[2]
+valor_moeda[3] => registrador:U_RegMoedaInput.d[3]
+moeda_valida <= or_gate:U_OR3.Z
+lt <= comparator_8bits:U_Comp.a_less_b
+eq <= comparator_8bits:U_Comp.a_equal_b
+gt <= comparator_8bits:U_Comp.a_greater_b
+retorno_zero <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|mux_4to1:U_MuxPreco
+sel_2bits[0] => Mux0.IN1
+sel_2bits[0] => Mux1.IN1
+sel_2bits[0] => Mux2.IN1
+sel_2bits[0] => Mux3.IN1
+sel_2bits[1] => Mux0.IN0
+sel_2bits[1] => Mux1.IN0
+sel_2bits[1] => Mux2.IN0
+sel_2bits[1] => Mux3.IN0
+a[0] => Mux3.IN2
+a[1] => Mux2.IN2
+a[2] => Mux1.IN2
+a[3] => Mux0.IN2
+b[0] => Mux3.IN3
+b[1] => Mux2.IN3
+b[2] => Mux1.IN3
+b[3] => Mux0.IN3
+c[0] => Mux3.IN4
+c[1] => Mux2.IN4
+c[2] => Mux1.IN4
+c[3] => Mux0.IN4
+d[0] => Mux3.IN5
+d[1] => Mux2.IN5
+d[2] => Mux1.IN5
+d[3] => Mux0.IN5
+y[0] <= Mux3.DB_MAX_OUTPUT_PORT_TYPE
+y[1] <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+y[2] <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+y[3] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|registrador:U_RegPreco
+clk => q[0]~reg0.CLK
+clk => q[1]~reg0.CLK
+clk => q[2]~reg0.CLK
+clk => q[3]~reg0.CLK
+clk => q[4]~reg0.CLK
+clk => q[5]~reg0.CLK
+clk => q[6]~reg0.CLK
+clk => q[7]~reg0.CLK
+rst => process_0.IN0
+ld => q[7]~reg0.ENA
+ld => q[6]~reg0.ENA
+ld => q[5]~reg0.ENA
+ld => q[4]~reg0.ENA
+ld => q[3]~reg0.ENA
+ld => q[2]~reg0.ENA
+ld => q[1]~reg0.ENA
+ld => q[0]~reg0.ENA
+clr => process_0.IN1
+d[0] => q[0]~reg0.DATAIN
+d[1] => q[1]~reg0.DATAIN
+d[2] => q[2]~reg0.DATAIN
+d[3] => q[3]~reg0.DATAIN
+d[4] => q[4]~reg0.DATAIN
+d[5] => q[5]~reg0.DATAIN
+d[6] => q[6]~reg0.DATAIN
+d[7] => q[7]~reg0.DATAIN
+q[0] <= q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= q[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= q[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= q[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= q[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= q[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|registrador:U_RegMoedaInput
+clk => q[0]~reg0.CLK
+clk => q[1]~reg0.CLK
+clk => q[2]~reg0.CLK
+clk => q[3]~reg0.CLK
+clk => q[4]~reg0.CLK
+clk => q[5]~reg0.CLK
+clk => q[6]~reg0.CLK
+clk => q[7]~reg0.CLK
+rst => process_0.IN0
+ld => q[7]~reg0.ENA
+ld => q[6]~reg0.ENA
+ld => q[5]~reg0.ENA
+ld => q[4]~reg0.ENA
+ld => q[3]~reg0.ENA
+ld => q[2]~reg0.ENA
+ld => q[1]~reg0.ENA
+ld => q[0]~reg0.ENA
+clr => process_0.IN1
+d[0] => q[0]~reg0.DATAIN
+d[1] => q[1]~reg0.DATAIN
+d[2] => q[2]~reg0.DATAIN
+d[3] => q[3]~reg0.DATAIN
+d[4] => q[4]~reg0.DATAIN
+d[5] => q[5]~reg0.DATAIN
+d[6] => q[6]~reg0.DATAIN
+d[7] => q[7]~reg0.DATAIN
+q[0] <= q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= q[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= q[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= q[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= q[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= q[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|or_gate:U_OR1
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|or_gate:U_OR2
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|or_gate:U_OR3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder
+a[0] => full_adder_1bit:GEN_ADDER:0:U_Bit.FA
+a[1] => full_adder_1bit:GEN_ADDER:1:U_Bit.FA
+a[2] => full_adder_1bit:GEN_ADDER:2:U_Bit.FA
+a[3] => full_adder_1bit:GEN_ADDER:3:U_Bit.FA
+a[4] => full_adder_1bit:GEN_ADDER:4:U_Bit.FA
+a[5] => full_adder_1bit:GEN_ADDER:5:U_Bit.FA
+a[6] => full_adder_1bit:GEN_ADDER:6:U_Bit.FA
+a[7] => full_adder_1bit:GEN_ADDER:7:U_Bit.FA
+b[0] => full_adder_1bit:GEN_ADDER:0:U_Bit.FB
+b[1] => full_adder_1bit:GEN_ADDER:1:U_Bit.FB
+b[2] => full_adder_1bit:GEN_ADDER:2:U_Bit.FB
+b[3] => full_adder_1bit:GEN_ADDER:3:U_Bit.FB
+b[4] => full_adder_1bit:GEN_ADDER:4:U_Bit.FB
+b[5] => full_adder_1bit:GEN_ADDER:5:U_Bit.FB
+b[6] => full_adder_1bit:GEN_ADDER:6:U_Bit.FB
+b[7] => full_adder_1bit:GEN_ADDER:7:U_Bit.FB
+s[0] <= full_adder_1bit:GEN_ADDER:0:U_Bit.FS
+s[1] <= full_adder_1bit:GEN_ADDER:1:U_Bit.FS
+s[2] <= full_adder_1bit:GEN_ADDER:2:U_Bit.FS
+s[3] <= full_adder_1bit:GEN_ADDER:3:U_Bit.FS
+s[4] <= full_adder_1bit:GEN_ADDER:4:U_Bit.FS
+s[5] <= full_adder_1bit:GEN_ADDER:5:U_Bit.FS
+s[6] <= full_adder_1bit:GEN_ADDER:6:U_Bit.FS
+s[7] <= full_adder_1bit:GEN_ADDER:7:U_Bit.FS
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:0:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:0:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:0:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:0:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:1:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:1:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:1:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:1:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:2:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:2:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:2:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:2:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:3:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:3:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:3:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:3:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:4:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:4:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:4:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:4:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:5:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:5:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:5:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:5:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:6:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:6:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:6:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:6:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:7:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:7:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:7:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|full_adder_8bits:U_Adder|full_adder_1bit:\GEN_ADDER:7:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|registrador:U_RegTotal
+clk => q[0]~reg0.CLK
+clk => q[1]~reg0.CLK
+clk => q[2]~reg0.CLK
+clk => q[3]~reg0.CLK
+clk => q[4]~reg0.CLK
+clk => q[5]~reg0.CLK
+clk => q[6]~reg0.CLK
+clk => q[7]~reg0.CLK
+rst => process_0.IN0
+ld => q[7]~reg0.ENA
+ld => q[6]~reg0.ENA
+ld => q[5]~reg0.ENA
+ld => q[4]~reg0.ENA
+ld => q[3]~reg0.ENA
+ld => q[2]~reg0.ENA
+ld => q[1]~reg0.ENA
+ld => q[0]~reg0.ENA
+clr => process_0.IN1
+d[0] => q[0]~reg0.DATAIN
+d[1] => q[1]~reg0.DATAIN
+d[2] => q[2]~reg0.DATAIN
+d[3] => q[3]~reg0.DATAIN
+d[4] => q[4]~reg0.DATAIN
+d[5] => q[5]~reg0.DATAIN
+d[6] => q[6]~reg0.DATAIN
+d[7] => q[7]~reg0.DATAIN
+q[0] <= q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= q[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= q[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= q[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= q[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= q[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|comparator_8bits:U_Comp
+a[0] => comparator_1bit:GEN_COMPARATOR:0:U_Bit.a
+a[1] => comparator_1bit:GEN_COMPARATOR:1:U_Bit.a
+a[2] => comparator_1bit:GEN_COMPARATOR:2:U_Bit.a
+a[3] => comparator_1bit:GEN_COMPARATOR:3:U_Bit.a
+a[4] => comparator_1bit:GEN_COMPARATOR:4:U_Bit.a
+b[0] => comparator_1bit:GEN_COMPARATOR:0:U_Bit.b
+b[1] => comparator_1bit:GEN_COMPARATOR:1:U_Bit.b
+b[2] => comparator_1bit:GEN_COMPARATOR:2:U_Bit.b
+b[3] => comparator_1bit:GEN_COMPARATOR:3:U_Bit.b
+b[4] => comparator_1bit:GEN_COMPARATOR:4:U_Bit.b
+a_less_b <= comparator_1bit:GEN_COMPARATOR:0:U_Bit.lt_out
+a_equal_b <= comparator_1bit:GEN_COMPARATOR:0:U_Bit.eq_out
+a_greater_b <= comparator_1bit:GEN_COMPARATOR:0:U_Bit.gt_out
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|comparator_8bits:U_Comp|comparator_1bit:\GEN_COMPARATOR:4:U_Bit
+a => eq_out.IN0
+a => gt_out.IN0
+a => lt_out.IN0
+b => eq_out.IN1
+b => lt_out.IN1
+b => gt_out.IN1
+gt_in => gt_out.IN1
+eq_in => eq_out.IN1
+eq_in => gt_out.IN1
+eq_in => lt_out.IN1
+lt_in => lt_out.IN1
+gt_out <= gt_out.DB_MAX_OUTPUT_PORT_TYPE
+eq_out <= eq_out.DB_MAX_OUTPUT_PORT_TYPE
+lt_out <= lt_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|comparator_8bits:U_Comp|comparator_1bit:\GEN_COMPARATOR:3:U_Bit
+a => eq_out.IN0
+a => gt_out.IN0
+a => lt_out.IN0
+b => eq_out.IN1
+b => lt_out.IN1
+b => gt_out.IN1
+gt_in => gt_out.IN1
+eq_in => eq_out.IN1
+eq_in => gt_out.IN1
+eq_in => lt_out.IN1
+lt_in => lt_out.IN1
+gt_out <= gt_out.DB_MAX_OUTPUT_PORT_TYPE
+eq_out <= eq_out.DB_MAX_OUTPUT_PORT_TYPE
+lt_out <= lt_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|comparator_8bits:U_Comp|comparator_1bit:\GEN_COMPARATOR:2:U_Bit
+a => eq_out.IN0
+a => gt_out.IN0
+a => lt_out.IN0
+b => eq_out.IN1
+b => lt_out.IN1
+b => gt_out.IN1
+gt_in => gt_out.IN1
+eq_in => eq_out.IN1
+eq_in => gt_out.IN1
+eq_in => lt_out.IN1
+lt_in => lt_out.IN1
+gt_out <= gt_out.DB_MAX_OUTPUT_PORT_TYPE
+eq_out <= eq_out.DB_MAX_OUTPUT_PORT_TYPE
+lt_out <= lt_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|comparator_8bits:U_Comp|comparator_1bit:\GEN_COMPARATOR:1:U_Bit
+a => eq_out.IN0
+a => gt_out.IN0
+a => lt_out.IN0
+b => eq_out.IN1
+b => lt_out.IN1
+b => gt_out.IN1
+gt_in => gt_out.IN1
+eq_in => eq_out.IN1
+eq_in => gt_out.IN1
+eq_in => lt_out.IN1
+lt_in => lt_out.IN1
+gt_out <= gt_out.DB_MAX_OUTPUT_PORT_TYPE
+eq_out <= eq_out.DB_MAX_OUTPUT_PORT_TYPE
+lt_out <= lt_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|comparator_8bits:U_Comp|comparator_1bit:\GEN_COMPARATOR:0:U_Bit
+a => eq_out.IN0
+a => gt_out.IN0
+a => lt_out.IN0
+b => eq_out.IN1
+b => lt_out.IN1
+b => gt_out.IN1
+gt_in => gt_out.IN1
+eq_in => eq_out.IN1
+eq_in => gt_out.IN1
+eq_in => lt_out.IN1
+lt_in => lt_out.IN1
+gt_out <= gt_out.DB_MAX_OUTPUT_PORT_TYPE
+eq_out <= eq_out.DB_MAX_OUTPUT_PORT_TYPE
+lt_out <= lt_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco
+A[0] => full_adder_1bit:GEN_SUBTRACTOR:0:U_Bit.FA
+A[1] => full_adder_1bit:GEN_SUBTRACTOR:1:U_Bit.FA
+A[2] => full_adder_1bit:GEN_SUBTRACTOR:2:U_Bit.FA
+A[3] => full_adder_1bit:GEN_SUBTRACTOR:3:U_Bit.FA
+A[4] => full_adder_1bit:GEN_SUBTRACTOR:4:U_Bit.FA
+A[5] => full_adder_1bit:GEN_SUBTRACTOR:5:U_Bit.FA
+A[6] => full_adder_1bit:GEN_SUBTRACTOR:6:U_Bit.FA
+A[7] => full_adder_1bit:GEN_SUBTRACTOR:7:U_Bit.FA
+B[0] => full_adder_1bit:GEN_SUBTRACTOR:0:U_Bit.FB
+B[1] => full_adder_1bit:GEN_SUBTRACTOR:1:U_Bit.FB
+B[2] => full_adder_1bit:GEN_SUBTRACTOR:2:U_Bit.FB
+B[3] => full_adder_1bit:GEN_SUBTRACTOR:3:U_Bit.FB
+B[4] => full_adder_1bit:GEN_SUBTRACTOR:4:U_Bit.FB
+B[5] => full_adder_1bit:GEN_SUBTRACTOR:5:U_Bit.FB
+B[6] => full_adder_1bit:GEN_SUBTRACTOR:6:U_Bit.FB
+B[7] => full_adder_1bit:GEN_SUBTRACTOR:7:U_Bit.FB
+result[0] <= full_adder_1bit:GEN_SUBTRACTOR:0:U_Bit.FS
+result[1] <= full_adder_1bit:GEN_SUBTRACTOR:1:U_Bit.FS
+result[2] <= full_adder_1bit:GEN_SUBTRACTOR:2:U_Bit.FS
+result[3] <= full_adder_1bit:GEN_SUBTRACTOR:3:U_Bit.FS
+result[4] <= full_adder_1bit:GEN_SUBTRACTOR:4:U_Bit.FS
+result[5] <= full_adder_1bit:GEN_SUBTRACTOR:5:U_Bit.FS
+result[6] <= full_adder_1bit:GEN_SUBTRACTOR:6:U_Bit.FS
+result[7] <= full_adder_1bit:GEN_SUBTRACTOR:7:U_Bit.FS
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:0:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:0:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:0:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:0:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:1:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:1:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:1:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:1:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:2:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:2:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:2:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:2:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:3:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:3:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:3:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:3:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:4:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:4:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:4:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:4:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:5:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:5:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:5:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:5:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:6:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:6:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:6:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:6:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:7:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:7:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:7:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubTroco|full_adder_1bit:\GEN_SUBTRACTOR:7:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|mux_2to1_8bits:U_MuxRetSrc
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+a[0] => y.DATAB
+a[1] => y.DATAB
+a[2] => y.DATAB
+a[3] => y.DATAB
+a[4] => y.DATAB
+a[5] => y.DATAB
+a[6] => y.DATAB
+a[7] => y.DATAB
+b[0] => y.DATAA
+b[1] => y.DATAA
+b[2] => y.DATAA
+b[3] => y.DATAA
+b[4] => y.DATAA
+b[5] => y.DATAA
+b[6] => y.DATAA
+b[7] => y.DATAA
+y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[3] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[4] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[5] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[6] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[7] <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec
+A[0] => full_adder_1bit:GEN_SUBTRACTOR:0:U_Bit.FA
+A[1] => full_adder_1bit:GEN_SUBTRACTOR:1:U_Bit.FA
+A[2] => full_adder_1bit:GEN_SUBTRACTOR:2:U_Bit.FA
+A[3] => full_adder_1bit:GEN_SUBTRACTOR:3:U_Bit.FA
+A[4] => full_adder_1bit:GEN_SUBTRACTOR:4:U_Bit.FA
+A[5] => full_adder_1bit:GEN_SUBTRACTOR:5:U_Bit.FA
+A[6] => full_adder_1bit:GEN_SUBTRACTOR:6:U_Bit.FA
+A[7] => full_adder_1bit:GEN_SUBTRACTOR:7:U_Bit.FA
+B[0] => full_adder_1bit:GEN_SUBTRACTOR:0:U_Bit.FB
+B[1] => full_adder_1bit:GEN_SUBTRACTOR:1:U_Bit.FB
+B[2] => full_adder_1bit:GEN_SUBTRACTOR:2:U_Bit.FB
+B[3] => full_adder_1bit:GEN_SUBTRACTOR:3:U_Bit.FB
+B[4] => full_adder_1bit:GEN_SUBTRACTOR:4:U_Bit.FB
+B[5] => full_adder_1bit:GEN_SUBTRACTOR:5:U_Bit.FB
+B[6] => full_adder_1bit:GEN_SUBTRACTOR:6:U_Bit.FB
+B[7] => full_adder_1bit:GEN_SUBTRACTOR:7:U_Bit.FB
+result[0] <= full_adder_1bit:GEN_SUBTRACTOR:0:U_Bit.FS
+result[1] <= full_adder_1bit:GEN_SUBTRACTOR:1:U_Bit.FS
+result[2] <= full_adder_1bit:GEN_SUBTRACTOR:2:U_Bit.FS
+result[3] <= full_adder_1bit:GEN_SUBTRACTOR:3:U_Bit.FS
+result[4] <= full_adder_1bit:GEN_SUBTRACTOR:4:U_Bit.FS
+result[5] <= full_adder_1bit:GEN_SUBTRACTOR:5:U_Bit.FS
+result[6] <= full_adder_1bit:GEN_SUBTRACTOR:6:U_Bit.FS
+result[7] <= full_adder_1bit:GEN_SUBTRACTOR:7:U_Bit.FS
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:0:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:0:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:0:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:0:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:1:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:1:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:1:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:1:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:2:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:2:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:2:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:2:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:3:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:3:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:3:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:3:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:4:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:4:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:4:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:4:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:5:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:5:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:5:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:5:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:6:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:6:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:6:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:6:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:7:U_Bit
+FA => half_adder:FA_1.A
+FB => half_adder:FA_1.B
+FC => half_adder:FA_2.B
+FS <= half_adder:FA_2.S
+FCA <= or_gate:FA_3.Z
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:7:U_Bit|half_adder:FA_1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:7:U_Bit|half_adder:FA_2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|subtractor_8bits:U_SubDec|full_adder_1bit:\GEN_SUBTRACTOR:7:U_Bit|or_gate:FA_3
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|mux_2to1_8bits:U_MuxDec
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+a[0] => y.DATAB
+a[1] => y.DATAB
+a[2] => y.DATAB
+a[3] => y.DATAB
+a[4] => y.DATAB
+a[5] => y.DATAB
+a[6] => y.DATAB
+a[7] => y.DATAB
+b[0] => y.DATAA
+b[1] => y.DATAA
+b[2] => y.DATAA
+b[3] => y.DATAA
+b[4] => y.DATAA
+b[5] => y.DATAA
+b[6] => y.DATAA
+b[7] => y.DATAA
+y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[3] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[4] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[5] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[6] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[7] <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|mux_2to1_8bits:U_MuxLd
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+sel => y.OUTPUTSELECT
+a[0] => y.DATAB
+a[1] => y.DATAB
+a[2] => y.DATAB
+a[3] => y.DATAB
+a[4] => y.DATAB
+a[5] => y.DATAB
+a[6] => y.DATAB
+a[7] => y.DATAB
+b[0] => y.DATAA
+b[1] => y.DATAA
+b[2] => y.DATAA
+b[3] => y.DATAA
+b[4] => y.DATAA
+b[5] => y.DATAA
+b[6] => y.DATAA
+b[7] => y.DATAA
+y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[3] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[4] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[5] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[6] <= y.DB_MAX_OUTPUT_PORT_TYPE
+y[7] <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|or_gate:U_OR_WEN
+X => Z.IN0
+Y => Z.IN1
+Z <= Z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|datapath:U_Datapath|registrador:U_RegRet
+clk => q[0]~reg0.CLK
+clk => q[1]~reg0.CLK
+clk => q[2]~reg0.CLK
+clk => q[3]~reg0.CLK
+clk => q[4]~reg0.CLK
+clk => q[5]~reg0.CLK
+clk => q[6]~reg0.CLK
+clk => q[7]~reg0.CLK
+rst => process_0.IN0
+ld => q[7]~reg0.ENA
+ld => q[6]~reg0.ENA
+ld => q[5]~reg0.ENA
+ld => q[4]~reg0.ENA
+ld => q[3]~reg0.ENA
+ld => q[2]~reg0.ENA
+ld => q[1]~reg0.ENA
+ld => q[0]~reg0.ENA
+clr => process_0.IN1
+d[0] => q[0]~reg0.DATAIN
+d[1] => q[1]~reg0.DATAIN
+d[2] => q[2]~reg0.DATAIN
+d[3] => q[3]~reg0.DATAIN
+d[4] => q[4]~reg0.DATAIN
+d[5] => q[5]~reg0.DATAIN
+d[6] => q[6]~reg0.DATAIN
+d[7] => q[7]~reg0.DATAIN
+q[0] <= q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= q[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= q[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= q[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= q[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= q[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+

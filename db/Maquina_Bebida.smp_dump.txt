@@ -1,0 +1,9 @@
+
+State Machine - |DE10_TOP_LEVEL|maquina_de_venda_de_bebidas_top_level:U_Maquina|controller:U_Controller|estado_atual
+Name estado_atual.Retorno estado_atual.Dispensa estado_atual.Moeda estado_atual.Seleciona estado_atual.Espera estado_atual.Inicio 
+estado_atual.Inicio 0 0 0 0 0 0 
+estado_atual.Espera 0 0 0 0 1 1 
+estado_atual.Seleciona 0 0 0 1 0 1 
+estado_atual.Moeda 0 0 1 0 0 1 
+estado_atual.Dispensa 0 1 0 0 0 1 
+estado_atual.Retorno 1 0 0 0 0 1 
